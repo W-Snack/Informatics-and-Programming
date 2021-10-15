@@ -16,6 +16,7 @@ int main() {
 	int is_true = 1;
 	int* friends;
 	int* people;
+	printf("Input the number of inhabitants and information about each\n");
 	scanf_s("%d", &N);
 	friends = (int*)malloc(N * sizeof(int));
 	people = (int*)malloc(N * sizeof(int));
@@ -58,7 +59,6 @@ int main() {
 			int j = 0;
 			srand(time(NULL));
 
-			// ğåàëèçàöèÿ àëãîğèòìà ïåğåñòàíîâêè
 			for (int i = N - 1; i >= 1; i--)
 			{
 				int j = rand() % (i + 1);
