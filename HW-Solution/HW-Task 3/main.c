@@ -16,8 +16,18 @@ int main() {
 	int size = 1;
 	printf("This program is for playing in 'Cows and bulls'\n");
 	while(size) {
-		printf("If you want to play 'Cows and bulls' input size of number, else print 0\n");
-		scanf_s("%d", &size);
+		int size_correct = 0;
+		printf("If you want to play 'Cows and bulls' input size of number(from 2 to 5), else print 0\n");
+		while (!size_correct) {
+			scanf_s("%d", &size);
+			if (size > 5) {
+				printf("Number too big\nTry again\n");
+			}
+			else if (size < 2) {
+				printf("Number is too small\nTry again\n");
+			}
+			else size_correct++;
+		}
 		int* number;
 		int* us_number;
 		int user_num;
