@@ -12,8 +12,25 @@
 #include <stdlib.h>
 #include <math.h>
 
+void shuffle(int* arr, int N)
+{
+	// инициализация генератора случайных чисел
+	srand(time(NULL));
+
+	// реализация алгоритма перестановки
+	for (int i = N - 1; i >= 1; i--)
+	{
+		int j = rand() % (i + 1);
+
+		int tmp = arr[j];
+		arr[j] = arr[i];
+		arr[i] = tmp;
+	}
+}
+
 int main() {
 	int size = 1;
+	int numbers[10] = { 1,2,3,4,5,6,7,8,9,0 };
 	printf("This program is for playing in 'Cows and bulls'\n");
 	while(size) {
 		int size_correct = 0;
@@ -23,7 +40,7 @@ int main() {
 			if (size > 5) {
 				printf("Number too big\nTry again\n");
 			}
-			else if (size < 2) {
+			else if ((size < 2) && (size != 0)) {
 				printf("Number is too small\nTry again\n");
 			}
 			else size_correct++;
@@ -44,13 +61,12 @@ int main() {
 		}
 		while (!is_correct && size) {
 			//generate number
+			shuffle(numbers, 10);
 
 			srand(time(NULL));
 			for (int i = 0; i < size; ++i)
 			{
-				int j = rand() % (i + 1);
-				number[i] = number[j];
-				number[j] = i + 1;
+				number[i] = numbers[i];
 			}
 			
 			//user try's
