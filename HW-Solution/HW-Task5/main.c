@@ -250,8 +250,8 @@ void ShellSort(char** file_name, int* file_size, int n)
 void CountingSort(char** file_name, int* file_size, int n)
 {
     int k;
-    int sortedMassSize[2000] = { 0 };
-    char sortedMassName[2000][200];
+    int sortedMassSize[1000];
+    char sortedMassName[1000][100];
     for (int i = 0; i < n; i++)
     {
         k = 0;
@@ -321,8 +321,11 @@ int main() {
 
         switch (us_choice) {
         case 1:
+            
+            c_files = 0;
             printf("Input path to dir: ");
-            gets(path);
+            scanf("%s", &path);
+            //gets(path);
             getCountOfFiles(path, &c_files);
             break;
         case 2:

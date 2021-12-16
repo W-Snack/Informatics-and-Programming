@@ -16,7 +16,7 @@ int main() {
 	int el, tmp, tmp2;
 
 	printf("This program swaps the right and left parts of the array\n");
-	printf("Choose a solution method:\n 1.With second array\n 2.Without second array\n ");
+	printf("Choose a solution method:\n 1.Reverse array With second array\n 2.Reverse array Without second array\n 3.The product of odd array elements\n 4.The product of array elements with odd indexes\n 5.The product of the elements of the array is odd in value\n 6.Swap elements with the specified indexes\n");
 	scanf_s("%d", &method);
 	printf("Input size of the array\n");
 	scanf_s("%d", &size);
@@ -46,6 +46,7 @@ int main() {
 		array[i] = el1;
 	}
 
+	int mult = 1; int i, j;
 	switch (method)
 	{
 	case 1:
@@ -55,6 +56,16 @@ int main() {
 		for (int i = 0, j = size / 2 + size % 2; j < size; i++, j++) {
 			array_reverse[j] = array[i];
 		}
+		printf("The resulting array: ");
+		for (int i = 0; i < size; i++) {
+			if (method == 2) {
+				printf("%d ", array[i]);
+			}
+			else {
+				printf("%d ", array_reverse[i]);
+			}
+		}
+
 		break;
 	case 2:
 		for (int i = 0, j = size / 2; j < size; i++, j++) {
@@ -70,16 +81,51 @@ int main() {
 			}
 			array[size / 2 + 1] = tmp;
 		}
+		printf("The resulting array: ");
+		for (int i = 0; i < size; i++) {
+			if (method == 2) {
+				printf("%d ", array[i]);
+			}
+			else {
+				printf("%d ", array_reverse[i]);
+			}
+		}
+
 		break;
-	}
-	printf("The resulting array: ");
-	for (int i = 0; i < size; i++) {
-		if (method == 2) {
+	case 3:
+		for (int i = 0; i < size; i++) {
+			if (((i+1) % 2) != 0) {
+				mult *= array[i];
+			}
+		}
+		printf("The product of odd array elements = %d\n", mult);
+		break;
+	case 4:
+		for (int i = 0; i < size; i++) {
+			if ((i % 2) != 0) {
+				mult *= array[i];
+			}
+		}
+		printf("The product of array elements with odd indexes = %d\n", mult);
+		break;
+	case 5:
+		for (int i = 0; i < size; i++) {
+			if ((array[i] % 2) != 0) {
+				mult *= array[i];
+			}
+		}
+		printf("The product of the elements of the array is odd in value = %d\n", mult);
+		break;
+	case 6:
+		printf("Input indexes: ");
+		scanf_s("%d %d", &i, &j);
+		tmp = array[i];
+		array[i] = array[j];
+		array[j] = tmp;
+		printf("The resulting array: ");
+		for (int i = 0; i < size; i++) 
 			printf("%d ", array[i]);
-		}
-		else {
-			printf("%d ", array_reverse[i]);
-		}
+		break;
 	}
 	free(array);
 	free(array_reverse);

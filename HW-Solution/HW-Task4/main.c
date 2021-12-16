@@ -19,12 +19,14 @@ void print_menu(){
 	printf("To display the menu again, press 6 \n");
 	printf("To stop programm, print 0\n");
 }
+
 int generateRandomArray(int* array, int size, int min, int max) {
 	for (int i = 0; i < size; i++) {
 		array[i] = rand() % (max - min + 1) + min;
 	}
 	return array;
 }
+
 int scanProduct(int* array, int size) {
 	int bar;
 	while (1) {
@@ -52,13 +54,13 @@ int main() {
 	int cart[100];
 	generateRandomArray(barcode, SIZE, 1000, 9999);
 	generateRandomArray(discount, SIZE, 0, 100);
-	for (int i = 0; i < SIZE; i++) {
-		printf("%d %d", barcode[i], discount[i]);
-	}
+	/*for (int i = 0; i < SIZE; i++) {
+		printf("%d ", barcode[i]);
+	}*/
 	
 	int us_choice; int id_item; int storage=0;	float sum = 0;
 
-	printf("Welcome!\n");
+	printf("\nWelcome!\n");
 	print_menu();
 	printf("Input: ");
 	scanf_s("%d",&us_choice);
@@ -132,6 +134,10 @@ int main() {
 			printf("\nIN TOTAL .................... %.2f\n", sum);
 			printf("TOTAL DISCOUNT .................... -%.2f\n", totaldiscount);
 			printf("TOTAL AMOUNT .................... %.2f\n", sum - totaldiscount);
+			sum = 0;
+			for (int i = 0; i < 100; i++) {
+				cart[i] = 20;
+			}
 			break;
 		case 6:
 			print_menu();
