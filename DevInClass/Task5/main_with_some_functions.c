@@ -102,17 +102,31 @@ int** createMatrix(int** matrix, int n, int m, int max, int min, char name) {
 }
 
 void inputData(int* n, int* m, int* k, int* max, int* min) {
-  // только printf scanf_s
-    printf("¬ведите число строк\n");
-    scanf_s("%d", n);
-    printf("¬ведите число столбцов\n");
-    scanf_s("%d", m);
-    printf("¬ведите число столбцов 2 матрицы\n");
-    scanf_s("%d", k);
-    printf("¬ведите максимальное значение элемента матрицы\n");
-    scanf_s("%d", max);
-    printf("¬ведите минимальное значение элемента матрицы\n");
-    scanf_s("%d", min);
+    int is_vector;
+    printf("ќперации над векторами? (1-да, 0-нет)\n");
+    scanf_s("%d", &is_vector);
+    if (is_vector) {
+        *m = 1;
+        printf("¬ведите число строк\n");
+        scanf_s("%d", n);
+        *k = *n;
+        printf("¬ведите максимальное значение элемента матрицы\n");
+        scanf_s("%d", max);
+        printf("¬ведите минимальное значение элемента матрицы\n");
+        scanf_s("%d", min);
+    }
+    else {
+        printf("¬ведите число строк\n");
+        scanf_s("%d", n);
+        printf("¬ведите число столбцов\n");
+        scanf_s("%d", m);
+        printf("¬ведите число столбцов 2 матрицы\n");
+        scanf_s("%d", k);
+        printf("¬ведите максимальное значение элемента матрицы\n");
+        scanf_s("%d", max);
+        printf("¬ведите минимальное значение элемента матрицы\n");
+        scanf_s("%d", min);
+    }
 }
 /// <summary>
 /// “ранспонирование матрицы
@@ -211,13 +225,13 @@ int main() {
   freeMemory(result, N, K);
 
   // сложение двух матриц
-  result = setMemory(result, N, M);
-  if (N == M && M == K) {
+  if ((N == M) && (M == K)) {  
+      result = setMemory(result, N, M);
       result = matrixAddition(matrix_A, N, M, matrix_B, K);
       printf("Matrix A+B =\n");
-      printMatrix(result, N, M);
+      printMatrix(result, N, M);  
+      freeMemory(result, N, M);
   }
-  freeMemory(result, N, M);
 
  
 
