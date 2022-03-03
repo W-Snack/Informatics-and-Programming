@@ -51,11 +51,11 @@ Kilograms Weight::to_kilograms(Weight g)
 	return value;
 }
 
-double Weight::to_pounds(Weight g)
+Pounds Weight::to_pounds(Weight g)
 {
 	double pounds = g.gramm * 0.0022;
-	Pounds(pounds);
-	return pounds;
+	Pounds value(pounds);
+	return value;
 }
 
 Weight Weight::operator*(double num)
@@ -121,6 +121,24 @@ bool operator<=(Weight left, Weight right)
 bool operator>=(Weight left, Weight right)
 {
 	if (left.gramm >= right.gramm) return true;
+	return false;
+}
+
+bool operator>(Weight left, Weight right)
+{
+	if (left.gramm > right.gramm) return true;
+	return false;
+}
+
+bool operator<(Weight left, Weight right)
+{
+	if (left.gramm < right.gramm) return true;
+	return false;
+}
+
+bool operator!=(Weight left, Weight right)
+{
+	if (left.gramm != right.gramm) return true;
 	return false;
 }
 

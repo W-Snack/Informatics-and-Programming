@@ -30,9 +30,9 @@ public:
 	Weight();
 	Weight(double g);
 	Weight(Kilograms kg);
-	Weight(Pounds p) :
-	double to_kilograms(Weight g);
-	double to_pounds(Weight g);
+	Weight(Pounds p);
+	Kilograms to_kilograms(Weight g);
+	Pounds to_pounds(Weight g);
 	void ShowWeight();
 	Weight operator*(double num);
 	Weight operator+(Weight right);
@@ -45,4 +45,7 @@ public:
 	friend bool operator==(Weight left,Weight right);
 	friend bool operator<=(Weight left, Weight right);
 	friend bool operator>=(Weight left, Weight right);
+	friend bool operator>(Weight left, Weight right);
+	friend bool operator<(Weight left, Weight right);
+	friend bool operator!=(Weight left, Weight right);
 };

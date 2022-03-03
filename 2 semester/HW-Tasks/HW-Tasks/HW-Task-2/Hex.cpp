@@ -29,6 +29,7 @@ const Hex &Hex::operator= (const Hex &right)
 Hex::Hex()
 {
 	len = 10;
+	path = "";
 	hex = new unsigned char[len];
 	for (int i = 0; i < len; i++) {
 		hex[i] = 0;
@@ -37,6 +38,7 @@ Hex::Hex()
 
 Hex::Hex(std::string num)
 {
+	path = "";
 	len = num.length();
 	hex = new unsigned char[len];
 	for (int i = 0; i < len; i++) {
@@ -90,7 +92,7 @@ Hex Hex::operator- (unsigned char a) {
 	return *this;
 }
 
-bool operator==(Hex left, Hex right) {
+bool operator==(Hex& left, Hex& right) {
 	std::string str;
 	std::string str2;
 	for (int i = 0; i < left.len; i++) {
@@ -105,7 +107,7 @@ bool operator==(Hex left, Hex right) {
 	return false;
 }
 
-bool operator<=(Hex left, Hex right) {
+bool operator<=(Hex& left, Hex& right) {
 	std::string str;
 	std::string str2;
 	for (int i = 0; i < left.len; i++) {
@@ -120,7 +122,7 @@ bool operator<=(Hex left, Hex right) {
 	return false;
 }
 
-bool operator>=(Hex left, Hex right) {
+bool operator>=(Hex& left, Hex& right) {
 	std::string str;
 	std::string str2;
 	for (int i = 0; i < left.len; i++) {
@@ -135,7 +137,7 @@ bool operator>=(Hex left, Hex right) {
 	return false;
 }
 
-bool operator>(Hex left, Hex right) {
+bool operator>(Hex& left, Hex& right) {
 	std::string str;
 	std::string str2;
 	for (int i = 0; i < left.len; i++) {
@@ -150,7 +152,7 @@ bool operator>(Hex left, Hex right) {
 	return false;
 }
 
-bool operator<(Hex left, Hex right) {
+bool operator<(Hex& left, Hex& right) {
 	std::string str;
 	std::string str2;
 	for (int i = 0; i < left.len; i++) {
@@ -180,16 +182,22 @@ unsigned char& Hex::operator[] (int subscript)
 	return hex[subscript]; 
 }
 
-std::ofstream& operator <<(std::ofstream out,Hex& num) {
-	out.open(path);
+void Hex::SetPath(std::string path) {
+	this->path = path;
+}
 
-	out << num.hex[i];
+std::ofstream& operator <<(std::ofstream out,Hex& num) {
+	out.open(num.path);
+	for (int i = 0; i < num.len; i++) {
+		out << num.hex[i];
+	}
+	out.close();
 	return out;
 }
 
-std::ifstream& operator >>(std::ifstream in, std::string path) {
+std::ifstream& operator >>(std::ifstream in, Hex& num ) {
 	std::string str;
-	std::ifstream file(path);
-	
-	return file;
+	std::ifstream file(num.path);
+	file >> num.hex;
+	return in;
 }

@@ -1,0 +1,6 @@
+﻿  Hex.cpp
+  Main.cpp
+  Создание кода...
+H:\learning\Informatics-and-Programming\2 semester\HW-Tasks\HW-Tasks\HW-Task-2\Hex.cpp(202): warning C4172: возвращение адреса локальной или временной переменной : in
+H:\learning\Informatics-and-Programming\2 semester\HW-Tasks\HW-Tasks\HW-Task-2\Hex.cpp(195): warning C4172: возвращение адреса локальной или временной переменной : out
+  HW-Task-2.vcxproj -> H:\learning\Informatics-and-Programming\2 semester\HW-Tasks\HW-Tasks\Debug\HW-Task-2.exe
