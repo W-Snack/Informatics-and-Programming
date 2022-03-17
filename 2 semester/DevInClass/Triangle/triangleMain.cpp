@@ -71,6 +71,109 @@ void inputTriangle(Type _type) {
 }
 
 */
+void InputTriangle_bySides(int AB, int BC, int AC) {
+    while (1) {
+        std::cout << "Input 3 side of triangle (between space): ";
+        std::cin >> AB >> BC >> AC;
+        if (!(AB + BC > AC && AB + AC > BC && AC + BC > AB)) {
+            std::cout << "Input error: triangle dont exist" << std::endl;
+            std::cout << "Try again" << std::endl;
+            continue;
+        }
+        break;
+    }
+}
+void  InputTriangle_byBaseAndHeight(int AB, int h) {
+    std::cout << "Input base of triangle: ";
+    std::cin >> AB;
+    std::cout << "Input height of triangle: ";
+    std::cin >> h;
+}
+void InputTriangle_byPointsCoords(int* A, int* B, int* C) {
+    std::cout << "Input 1st point's coordinates (between space): ";
+    std::cin >> A[0] >> A[1];
+    std::cout << "Input 2nd point's coordinates (between space): ";
+    std::cin >> B[0] >> B[1];
+    std::cout << "Input 3rd point's coordinates (between space): ";
+    std::cin >> C[0] >> C[1];
+}
+
+void ShowMenuLevel1(){
+    std::cout << "Ways to define a triangle:" << std::endl
+        << "1) by three sides," << std::endl
+        << "2) by base and height," << std::endl
+        << "3) by three points" << std::endl
+        << "Input: ";
+}
+void ShowMenuLevel2() {
+    std::cout << "Methods: 1) get square," << std::endl
+        << "2) get perimeter, " << std::endl
+        << "3) get type of triangle," << std::endl
+        << "4) compare with another triangle by square," << std::endl
+        << "5) back to first menu," << std::endl
+        << "0) exit," << std::endl
+        << "Input: ";
+}
+
+float TriangleSquarebySides(int AB, int BC, int AC) {
+    float p = (AB + BC + AC) * 0.5;
+    float S = sqrt(p * (p - AB) * (p - BC) * (p - AC));
+    return S;
+}
+
+float TriangleSquarebyBaseAndHeight(int AB, int h) {
+    float S = 0 / 5 * h * AB;
+    return S;
+}
+float TriangleSquarebyCoords(int* A, int* B, int* C) {
+    float S = 0.5 * abs((((A[0] - C[0]) * (B[1] - C[1])) - ((A[1] - C[1]) * (B[0] - C[0]))));
+    return S;
+}
+
+float TrianglePerimeterbySides(int AB, int BC, int AC) {
+    float p = AB + BC + AC;
+    return p;
+}
+
+
+float TrianglePerimeterbyCoords(int* A, int* B, int* C) {
+    float p = sqrt((B[0] - A[0]) ^ 2 + (B[1] - A[1]) ^ 2) + sqrt((C[0] - B[0]) ^ 2 + (C[1] - B[1]) ^ 2) + sqrt((C[0] - A[0]) ^ 2 + (C[1] - A[1]) ^ 2);
+    return p;
+}
+
+void TriangleTypebySides(int AB, int BC, int AC) {
+    if (AB = BC = AC) {
+        std::cout << "Triangle is equilateral" << std::endl;
+    }
+    else if ((AB = BC != AC) || (AC = BC != AB) || (AC = AB != BC)) {
+        std::cout << "Triangle is isosceles" << std::endl;
+    }
+    else if (((AB ^ 2) == ((BC ^ 2) + (AC ^ 2))) || ((AC ^ 2) == ((BC ^ 2) + (AB ^ 2))) || ((BC ^ 2) == ((AB ^ 2) + (AC ^ 2)))) {
+        std::cout << "Right triangle" << std::endl;
+    }
+    else {
+        std::cout << "Triangle is scalene" << std::endl;
+    }
+}
+
+void TriangleTypebyCoords(int* A, int* B, int* C) {
+    int l1 = sqrt((B[0] - A[0]) ^ 2 + (B[1] - A[1]) ^ 2);
+    int l2 = sqrt((C[0] - B[0]) ^ 2 + (C[1] - B[1]) ^ 2);
+    int l3 = sqrt((C[0] - A[0]) ^ 2 + (C[1] - A[1]) ^ 2);
+    if (l1 = l2 = l3) {
+        std::cout << "Triangle is equilateral" << std::endl;
+    }
+    else if ((l1 = l2 != l3) || (l3 = l2 != l1) || (l3 = l1 != l2)) {
+        std::cout << "Triangle is isosceles" << std::endl;
+    }
+    else if ((l1 ^ 2 == l2 ^ 2 + l3 ^ 2) || (l3 ^ 2 == l2 ^ 2 + l1 ^ 2) || (l2 ^ 2 == l1 ^ 2 + l3 ^ 2)) {
+        std::cout << "Right triangle" << std::endl;
+    }
+    else {
+        std::cout << "Triangle is scalene" << std::endl;
+    }
+}
+
 
 enum Type { bySides, byBaseAndHeight, byPointsCoords };
 
@@ -86,55 +189,27 @@ int main() {
 
   while (!exit_flag) {
     back_flag = false;
-    std::cout << "Ways to define a triangle:" << std::endl
-      << "1) by three sides," << std::endl
-      << "2) by base and height," << std::endl
-      << "3) by three points" << std::endl
-      << "Input: ";
     std::cin >> user_choosen;
 
     switch (user_choosen) {
     case 1:
       _inputType = bySides;
-      while (1) {
-        std::cout << "Input 3 side of triangle (between space): ";
-        std::cin >> AB >> BC >> AC;
-        if (!(AB + BC > AC && AB + AC > BC && AC + BC > AB)) {
-          std::cout << "Input error: triangle dont exist" << std::endl;
-          std::cout << "Try again" << std::endl;
-          continue;
-        }
-        break;
-      }
+      InputTriangle_bySides( AB,  BC,  AC);
       break;
     case 2:
       _inputType = byBaseAndHeight;
-      std::cout << "Input base of triangle: ";
-      std::cin >> AB;
-      std::cout << "Input height of triangle: ";
-      std::cin >> h;
+      InputTriangle_byBaseAndHeight(AB, h);
       break;
     case 3:
       _inputType = byPointsCoords;
-      std::cout << "Input 1st point's coordinates (between space): ";
-      std::cin >> A[0] >> A[1];
-      std::cout << "Input 2nd point's coordinates (between space): ";
-      std::cin >> B[0] >> B[1];
-      std::cout << "Input 3rd point's coordinates (between space): ";
-      std::cin >> C[0] >> C[1];
+      InputTriangle_byPointsCoords(A, B, C);
       break;
     default:
       std::cout << "Input error: error in input" << std::endl;
     }
 
     while (!back_flag) {
-      std::cout << "Methods: 1) get square," << std::endl
-        << "2) get perimeter, " << std::endl
-        << "3) get type of triangle," << std::endl
-        << "4) compare with another triangle by square," << std::endl
-        << "5) back to first menu," << std::endl
-        << "0) exit," << std::endl
-        << "Input: ";
+      
       std::cin >> user_choosen;
 
       switch (user_choosen) {
@@ -144,21 +219,20 @@ int main() {
       case 1:
         if (_inputType == bySides) {
           if (AB + BC > AC && AB + AC > BC && AC + BC > AB) {
-            p = (AB + BC + AC) * 0.5;
-            S = sqrt(p * (p - AB) * (p - BC) * (p - AC));
+              S = TriangleSquarebySides(AB, BC, AC);
             std::cout << "Square of triangle: S = " << S << std::endl;
           } else {
             std::cout << "Input error: triangle dont exist" << std::endl;
           }
         } else if (_inputType == byBaseAndHeight) {
             if (AB && h) {
-                S = 0 / 5 * h * AB;
+                S = TriangleSquarebyBaseAndHeight(AB, h);
                 std::cout << "Square of triangle: S = " << S << std::endl;
             }else {
                 std::cout << "Input error: triangle dont exist" << std::endl;
             }
         } else if (_inputType == byPointsCoords) {
-            S = 0.5 * abs((((A[0] - C[0]) * (B[1] - C[1])) - ((A[1] - C[1]) * (B[0] - C[0]))));
+            S = TriangleSquarebyCoords(A, B, C);
             if (S > 0) {
                 std::cout << "Square of triangle: S = " << S << std::endl;
             }else {
@@ -171,7 +245,7 @@ int main() {
       case 2:
         if (_inputType == bySides) {
             if (AB && BC && AC) {
-                p = AB + BC + AC;
+                p = TrianglePerimeterbySides(AB, BC, AC);
                 std::cout << "Perimeter of triangle: p = " << p << std::endl;
           }
             else {
@@ -182,7 +256,7 @@ int main() {
           std::cout << "Input error: we couldn't find perimeter by your parameters" << std::endl;
         }
         else if (_inputType == byPointsCoords) {
-            p = sqrt((B[0] - A[0]) ^ 2 + (B[1] - A[1]) ^ 2) + sqrt((C[0] - B[0]) ^ 2 + (C[1] - B[1]) ^ 2) + sqrt((C[0] - A[0]) ^ 2 + (C[1] - A[1]) ^ 2);
+            p = TrianglePerimeterbyCoords(A, B, C);
             std::cout << "Perimeter of triangle: p = " << p << std::endl;
         }
         break;
@@ -194,38 +268,13 @@ int main() {
         // right triangle - прямоугольный,
         // scalene - произвольный.
           if (_inputType == bySides) {
-              if (AB = BC = AC) {
-                  std::cout << "Triangle is equilateral" << std::endl;
-              }
-              else if ((AB = BC != AC) || (AC = BC != AB) || (AC = AB != BC)) {
-                  std::cout << "Triangle is isosceles" << std::endl;
-              }
-              else if ((AB ^ 2 == BC ^ 2 + AC ^ 2) || (AC ^ 2 == BC ^ 2 + AB ^ 2) || (BC ^ 2 == AB ^ 2 + AC ^ 2)) {
-                  std::cout << "Right triangle" << std::endl;
-              }
-              else {
-                  std::cout << "Triangle is scalene" << std::endl;
-              }
+              TriangleTypebySides();
           }
           else if (_inputType == byBaseAndHeight) {
               std::cout << "Input error: we couldn't find type of triangle by your parameters" << std::endl;
           }
           else if (_inputType == byPointsCoords) {
-              int l1 = sqrt((B[0] - A[0]) ^ 2 + (B[1] - A[1]) ^ 2);
-              int l2 = sqrt((C[0] - B[0]) ^ 2 + (C[1] - B[1]) ^ 2);
-              int l3 = sqrt((C[0] - A[0]) ^ 2 + (C[1] - A[1]) ^ 2);
-              if (l1 = l2 = l3) {
-                  std::cout << "Triangle is equilateral" << std::endl;
-              }
-              else if ((l1 = l2 != l3) || (l3 = l2 != l1) || (l3 = l1 != l2)) {
-                  std::cout << "Triangle is isosceles" << std::endl;
-              }
-              else if ((l1 ^ 2 == l2 ^ 2 + l3 ^ 2) || (l3 ^ 2 == l2 ^ 2 + l1 ^ 2) || (l2 ^ 2 == l1 ^ 2 + l3 ^ 2)) {
-                  std::cout << "Right triangle" << std::endl;
-              }
-              else {
-                  std::cout << "Triangle is scalene" << std::endl;
-              }
+              TriangleTypebyCoords();
           }
           
         break;
@@ -234,9 +283,8 @@ int main() {
           std::cout << "Input square of another triangle" << std::endl << "Input:";
           std::cin >> S2;
           if (_inputType == bySides) {
-              if (AB + BC > AC && AB + AC > BC && AC + BC > AB) {
-                  p = (AB + BC + AC) * 0.5;
-                  S = sqrt(p * (p - AB) * (p - BC) * (p - AC));
+              if (AB + BC > AC && AB + AC > BC && AC + BC > AB) {               
+                  S = TriangleSquarebySides(AB, BC, AC);
               }
               else {
                   std::cout << "Input error: triangle dont exist" << std::endl;
@@ -244,14 +292,14 @@ int main() {
           }
           else if (_inputType == byBaseAndHeight) {
               if (AB && h) {
-                  S = 0 / 5 * h * AB;
+                  S = TriangleSquarebyBaseAndHeight(AB, h);
               }
               else {
                   std::cout << "Input error: triangle dont exist" << std::endl;
               }
           }
           else if (_inputType == byPointsCoords) {
-              S = 0.5 * abs((((A[0] - C[0]) * (B[1] - C[1])) - ((A[1] - C[1]) * (B[0] - C[0]))));
+              S = TriangleSquarebyCoords(A, B, C);
               if (S > 0) {
               }
               else {
