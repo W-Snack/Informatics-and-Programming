@@ -5,7 +5,5 @@
 
 int main() {
 	Hex a("12");
-	unsigned char b = 3;
-	Hex sum = a + b;
-	sum.ShowHex();
+	a.ShowHex();
 }
