@@ -1,0 +1,25 @@
+class TPoint : public
+TplexNode
+{
+protected:
+TVectorDouble x;
+Public:
+TPoint(TVectordouble x=0);
+TPoint(const TPoint& p);
+TPoint(TPoint& p);
+~TPoint();
+bool IsPoint();
+}
+class TPlex : public
+TPlexNode
+{
+Public:
+TPlex(TPlex _l , TPlex  _r, TPlex _p);
+TPlex (const TPlex&);
+TPlex(TPlex&);
+virtual ~TPlex();
+TPlex* GetLeft();
+void SetLeft(TPlex* p);
+bool IsLeft();
+bool IsPoint();
+}
